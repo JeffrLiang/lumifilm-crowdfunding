@@ -1,0 +1,211 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+==========================================================================
+【AI HANDOVER NOTE】
+1. DESIGN PHILOSOPHY:
+   - Cinematic Web3 Atmosphere: LumiFilm merges the elegance of film industry aesthetics with futuristic blockchain UI patterns. The design evokes a premium cinema experience while maintaining Web3's transparency and technological sophistication.
+   - Neo-Glassmorphism with Cosmic Depth: Dark space-like backgrounds (#050816) create infinite depth, while glassmorphic cards with subtle backdrop-blur float above. Rim-lighting effects and electric blue glows (#3b82f6) simulate holographic interfaces.
+   - Physicality through Light: Neon accents and gradient overlays (deep navy #1a3a8f → vibrant purple #7c3aed) create visual hierarchy. Progress bars and interactive elements use luminous effects to guide user attention, mimicking theatrical lighting design.
+
+2. TYPOGRAPHY:
+   - Cormorant Garamond (Display/Headings): Elegant serif chosen for its cinematic, editorial quality—evoking film credits and premium storytelling. High contrast strokes create dramatic visual impact suitable for hero sections and campaign titles.
+   - Inter (UI/Body): Modern geometric sans-serif ensures optimal readability across all UI components. Its neutral character balances the ornate display font while maintaining Web3's clean, technical aesthetic.
+   - JetBrains Mono (Technical Data): Used exclusively for wallet addresses (0xA3F...92K), ETH values, and blockchain-related data, reinforcing the platform's decentralized nature.
+
+3. COLOR SYSTEM:
+   - Brand Core (Deep Navy #1e3a8a): Extracted from the LumiFilm logo, this authoritative blue (Hue 220°) serves as the primary brand anchor. It maps to --primary for CTAs and --ring for focus states, ensuring brand consistency.
+   - Accent Gradient (Cobalt → Purple): --accent uses electric blue (#3b82f6, Hue 217°) for interactive elements, while secondary purple tones (#7c3aed, Hue 258°) create depth in gradients and hover states. This blue-purple spectrum evokes both technology and creativity.
+   - Semantic Colors: --success uses emerald green (Hue 160°) for funded campaigns, --destructive employs rose red (Hue 0°) for failed states, and --warning uses amber (Hue 45°) for deadline alerts. All semantic colors maintain high chroma in dark mode for visibility.
+   - Cosmic Background System: --background uses near-black (#050816, L 0.08) to simulate deep space, while --card (#0f172a, L 0.12) provides subtle elevation. This creates a layered depth effect essential for glassmorphic UI.
+
+4. USAGE GUIDE:
+   - Layout: Full-width hero sections with centered content containers (max-width: 1280px). Campaign cards use Bento-style grid layouts with consistent 1rem gaps.
+   - Glassmorphism Implementation: Apply backdrop-blur-md to card elements with background opacity 0.6-0.8. Use --border (OKLCH with low chroma) for subtle card edges.
+   - Glow Effects: Use --ring color with box-shadow blur (0 0 20px) on interactive elements. Apply to progress bars, CTAs, and wallet connect buttons for holographic feel.
+   - Progress Bars: Gradient from --primary to --accent with animated shimmer effect. Use --muted-foreground for unfilled portions.
+   - Status Badges: Active (--accent), Successful (--success), Failed (--destructive) with 0.2 opacity backgrounds and full opacity text.
+   - Particle Background: Subtle star field using --muted with 0.3 opacity, animated with CSS transforms for parallax depth.
+   - Film Strip Decorative Elements: Use --border color at 0.4 opacity for subtle cinematic framing around hero sections.
+==========================================================================
+*/
+
+:root {
+  /* Typography */
+  --font-sans: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: JetBrains Mono, 'Courier New', monospace;
+  --font-heading: 'Cormorant Garamond', Georgia, serif;
+  
+  /* Radius */
+  --radius: 0.75rem;
+
+  /* Core UI Tokens */
+  --background: oklch(0.98 0.005 220);
+  --foreground: oklch(0.15 0.02 220);
+  --card: oklch(0.96 0.008 220);
+  --card-foreground: oklch(0.18 0.02 220);
+  --popover: oklch(0.97 0.006 220);
+  --popover-foreground: oklch(0.16 0.02 220);
+  --primary: oklch(0.42 0.18 220);
+  --primary-foreground: oklch(0.98 0.005 220);
+  --secondary: oklch(0.92 0.01 220);
+  --secondary-foreground: oklch(0.22 0.02 220);
+  --muted: oklch(0.94 0.008 220);
+  --muted-foreground: oklch(0.48 0.02 220);
+  --accent: oklch(0.58 0.22 217);
+  --accent-foreground: oklch(0.98 0.005 217);
+  --destructive: oklch(0.55 0.24 15);
+  --destructive-foreground: oklch(0.98 0.005 15);
+  --border: oklch(0.88 0.012 220);
+  --input: oklch(0.86 0.015 220);
+  --ring: oklch(0.42 0.18 220);
+  
+  /* Chart Tokens */
+  --chart-1: oklch(0.58 0.22 217);
+  --chart-2: oklch(0.62 0.26 258);
+  --chart-3: oklch(0.68 0.18 160);
+  --chart-4: oklch(0.72 0.20 45);
+  --chart-5: oklch(0.55 0.24 15);
+  
+  /* Sidebar Tokens */
+  --sidebar: oklch(0.96 0.008 220);
+  --sidebar-foreground: oklch(0.22 0.02 220);
+  --sidebar-primary: oklch(0.42 0.18 220);
+  --sidebar-primary-foreground: oklch(0.98 0.005 220);
+  --sidebar-accent: oklch(0.92 0.01 220);
+  --sidebar-accent-foreground: oklch(0.22 0.02 220);
+  --sidebar-border: oklch(0.88 0.012 220);
+  --sidebar-ring: oklch(0.42 0.18 220);
+}
+
+.dark {
+  --background: oklch(0.08 0.02 220);
+  --foreground: oklch(0.96 0.005 220);
+  --card: oklch(0.12 0.025 220);
+  --card-foreground: oklch(0.94 0.008 220);
+  --popover: oklch(0.10 0.022 220);
+  --popover-foreground: oklch(0.95 0.006 220);
+  --primary: oklch(0.48 0.20 220);
+  --primary-foreground: oklch(0.98 0.005 220);
+  --secondary: oklch(0.18 0.03 220);
+  --secondary-foreground: oklch(0.92 0.008 220);
+  --muted: oklch(0.16 0.028 220);
+  --muted-foreground: oklch(0.62 0.015 220);
+  --accent: oklch(0.65 0.26 217);
+  --accent-foreground: oklch(0.08 0.02 217);
+  --destructive: oklch(0.62 0.28 12);
+  --destructive-foreground: oklch(0.98 0.005 12);
+  --border: oklch(0.22 0.035 220);
+  --input: oklch(0.24 0.038 220);
+  --ring: oklch(0.65 0.26 217);
+  
+  /* Chart Tokens */
+  --chart-1: oklch(0.65 0.26 217);
+  --chart-2: oklch(0.68 0.28 258);
+  --chart-3: oklch(0.72 0.22 160);
+  --chart-4: oklch(0.75 0.24 45);
+  --chart-5: oklch(0.62 0.28 12);
+  
+  /* Sidebar Tokens */
+  --sidebar: oklch(0.10 0.022 220);
+  --sidebar-foreground: oklch(0.92 0.008 220);
+  --sidebar-primary: oklch(0.48 0.20 220);
+  --sidebar-primary-foreground: oklch(0.98 0.005 220);
+  --sidebar-accent: oklch(0.18 0.03 220);
+  --sidebar-accent-foreground: oklch(0.92 0.008 220);
+  --sidebar-border: oklch(0.22 0.035 220);
+  --sidebar-ring: oklch(0.65 0.26 217);
+}
+
+@theme inline {
+  /* Shadcn Core Mapping */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Charts Mapping */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Sidebar Mapping */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Typography */
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-heading: var(--font-heading);
+
+  /* Radius */
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply scroll-smooth antialiased;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans min-h-screen;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+
+  code, pre {
+    @apply font-mono;
+  }
+
+  ::selection {
+    @apply bg-primary/20 text-primary;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/20 rounded-full hover:bg-muted-foreground/40;
+  }
+}
